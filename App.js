@@ -6,6 +6,11 @@ import {
   Roboto_400Regular as robotoRegular,
   Roboto_700Bold as robotoBold,
 } from "@expo-google-fonts/roboto";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import ReviewDetails from "./screens/ReviewDetails";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -17,5 +22,12 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <Home />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const ReviewDetails = () => {
+const ReviewDetails = ({ route }) => {
+  const { title, author } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>ReviewDetails Screen</Text>
+      <Text>
+        {title} by {author}
+      </Text>
     </View>
   );
 };
