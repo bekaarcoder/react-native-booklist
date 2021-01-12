@@ -1,13 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SimpleLineIcons } from "@expo/vector-icons";
-import Home from "../screens/Home";
-import ReviewDetails from "../screens/ReviewDetails";
+import About from "../screens/About";
 import { TouchableOpacity } from "react-native";
 
 const Stack = createStackNavigator();
 
-const HomeStackNavigator = ({ navigation }) => {
+const AboutStackNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,9 +17,9 @@ const HomeStackNavigator = ({ navigation }) => {
     >
       <Stack.Screen
         name="Home"
-        component={Home}
+        component={About}
         options={{
-          headerTitle: "BookReads",
+          headerTitle: "About",
           headerLeft: () => (
             <TouchableOpacity
               style={{ marginLeft: 15 }}
@@ -31,13 +30,8 @@ const HomeStackNavigator = ({ navigation }) => {
           ),
         }}
       />
-      <Stack.Screen
-        name="ReviewDetails"
-        component={ReviewDetails}
-        options={{ title: "Book Details" }}
-      />
     </Stack.Navigator>
   );
 };
 
-export default HomeStackNavigator;
+export default AboutStackNavigator;

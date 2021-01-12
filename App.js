@@ -1,16 +1,16 @@
 import React from "react";
-import Home from "./screens/Home";
 import AppLoading from "expo-app-loading";
 import {
   useFonts,
   Roboto_400Regular as robotoRegular,
   Roboto_700Bold as robotoBold,
 } from "@expo-google-fonts/roboto";
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import ReviewDetails from "./screens/ReviewDetails";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import HomeStackNavigator from "./routes/homeStack";
+import AboutStackNavigator from "./routes/aboutStack";
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -24,10 +24,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeStackNavigator} />
+        <Drawer.Screen name="About" component={AboutStackNavigator} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
