@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import { SimpleLineIcons, AntDesign } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import ReviewDetails from "../screens/ReviewDetails";
 import { TouchableOpacity } from "react-native";
@@ -8,6 +8,16 @@ import { TouchableOpacity } from "react-native";
 const Stack = createStackNavigator();
 
 const HomeStackNavigator = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,7 +28,6 @@ const HomeStackNavigator = ({ navigation }) => {
     >
       <Stack.Screen
         name="Home"
-        component={Home}
         options={{
           headerTitle: "BookReads",
           headerLeft: () => (
@@ -29,8 +38,25 @@ const HomeStackNavigator = ({ navigation }) => {
               <SimpleLineIcons name="menu" size={24} color="black" />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ marginRight: 15 }}
+              onPress={handleModalOpen}
+            >
+              <AntDesign name="plus" size={24} color="black" />
+            </TouchableOpacity>
+          ),
         }}
-      />
+      >
+        {(props) => (
+          <Home
+            {...props}
+            modalVisible={modalVisible}
+            handleModalOpen={handleModalOpen}
+            handleModalClose={handleModalClose}
+          />
+        )}
+      </Stack.Screen>
       <Stack.Screen
         name="ReviewDetails"
         component={ReviewDetails}
