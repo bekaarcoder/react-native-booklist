@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   View,
   Modal,
-  Alert,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../styles/global";
 import Card from "../components/Card";
+import AddForm from "./AddForm";
 
 const Home = ({
   navigation,
@@ -102,19 +103,29 @@ const Home = ({
     },
   ]);
 
+  const addBook = (book) => {
+    book.key = Math.random().toString();
+    setBooks((prevState) => {
+      return [book, ...prevState];
+    });
+    handleModalClose();
+  };
+
   return (
     <View style={globalStyles.container}>
       <Modal animationType="slide" visible={modalVisible}>
-        <View style={styles.centeredView}>
-          <View style={styles.close}>
-            <TouchableOpacity onPress={handleModalClose}>
-              <AntDesign name="close" size={24} color="black" />
-            </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.modalContent}>
+            <View style={styles.close}>
+              <TouchableOpacity onPress={handleModalClose}>
+                <AntDesign name="close" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.modalView}>
+              <AddForm addBook={addBook} />
+            </View>
           </View>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
 
       <FlatList
@@ -138,6 +149,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     padding: 10,
+  },
+  modalContent: {
+    flex: 1,
+  },
+  modalView: {
+    flex: 1,
   },
 });
 
