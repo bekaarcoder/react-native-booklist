@@ -21,4 +21,17 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 6,
     marginVertical: 8,
   },
+  errorInput: {
+    borderWidth: 1,
+    borderColor: "#b3001b",
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 6,
+    marginVertical: 8,
+  },
+  errorText: {
+    color: "#b3001b",
+    marginLeft: 5,
+    marginBottom: 5,
+  },
 });
